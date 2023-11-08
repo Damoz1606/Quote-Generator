@@ -5,6 +5,9 @@ const copyButton = document.querySelector(".copy");
 const speechButton = document.querySelector(".speech");
 const synth = speechSynthesis;
 
+const notification = document.querySelector(".notification");
+const notificationMessage = document.querySelector(".notification .message");
+
 const randomQuote = () => {
     quoteButton.classList.add("loading");
     quoteButton.innerHTML = "Loading Quote...";
@@ -32,7 +35,22 @@ const speechQuote = () => {
 
 const copyQuote = () => {
     navigator.clipboard.writeText(quoteText.innerHTML);
+    setText("Copied to clipboard 😂");
+    activeNotification();
+
 }
+
+const activeNotification = () => {
+    notification.classList.add("active");
+    setTimeout(() => {
+        notification.classList.remove("active");
+    }, 4000);
+}
+
+const setText = (value) => {
+    notificationMessage.innerHTML = value;
+}
+
 
 speechButton.addEventListener("click", speechQuote);
 copyButton.addEventListener("click", copyQuote);
